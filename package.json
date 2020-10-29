@@ -1,0 +1,27 @@
+{
+  "name": "addidtoarray",
+  "version": "1.0.0",
+  "description": "Simple Function to add an id to an array (May change later!)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LetsMelon/addIdToArray.git"
+  },
+  "keywords": [
+    "array",
+    "id"
+  ],
+  "author": "Domenic Melcher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LetsMelon/addIdToArray/issues"
+  },
+  "homepage": "https://github.com/LetsMelon/addIdToArray#readme",
+  "dependencies": {
+    "isarray": "^2.0.5",
+    "isobject": "^4.0.0"
+  }
+}
