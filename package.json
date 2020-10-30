@@ -26,5 +26,10 @@
   },
   "devDependencies": {
     "jest": "^26.6.1"
-  }
+  },
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ]
 }
