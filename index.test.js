@@ -66,4 +66,49 @@ describe('addIdToArray', () => {
       });
     });
   });
+  describe('Object with items', () => {
+    it('Should return an array with objects', () => {
+      const result = f([{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}]);
+      expect(isArray(result)).toBe(true);
+      expect(result.length).toBe(2);
+      expect(isObject(result[0])).toBe(true);
+    });
+    it('Should return objects with id', () => {
+      const result = f([{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}]);
+      expect(result[0].id).toBeDefined();
+      expect(typeof result[0].id).toBe('number');
+      expect(result[1].id).toBeDefined();
+      expect(typeof result[1].id).toBe('number');
+    });
+    it('Should work with different datatypes', () => {
+      // String:
+      let result = f([{surname: 'Handlerson', name: 'Jeff'}]);
+      expect(typeof result[0].surname).toBe('string');
+      expect(typeof result[0].name).toBe('string');
+
+      // Number:
+      result = f([{age: 22}]);
+      expect(typeof result[0].age).toBe('number');
+
+      // Boolean:
+      result = f([{car_is_red: true}, {car_is_red: false}]);
+      expect(typeof result[0].car_is_red).toBe('boolean');
+      expect(typeof result[1].car_is_red).toBe('boolean');
+
+      // Object:
+      result = f([{car: {color: 'red', 'max-miles-per-hour': 95}}]);
+      expect(isObject(result[0])).toBe(true);
+      expect(result[0].car['max-miles-per-hour']).toBeDefined();
+
+      // Nested-Object:
+      result = f([{car: {color: 'red', driver: {name: 'Jeff', surname: 'Handlerson', age: 22}}}]);
+      expect(isObject(result[0])).toBe(true);
+      expect(isObject(result[0].car.driver)).toBe(true);
+      
+      // Array:
+      result = f([{'lottery numbers': [23, 43, 12, 10, 30]}]);
+      expect(isArray(result[0]['lottery numbers'])).toBe(true);
+      expect(result[0]['lottery numbers'].length).toBe(5);
+    });
+  });
 });
