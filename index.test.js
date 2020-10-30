@@ -110,5 +110,22 @@ describe('addIdToArray', () => {
       expect(isArray(result[0]['lottery numbers'])).toBe(true);
       expect(result[0]['lottery numbers'].length).toBe(5);
     });
+    describe('Should have a valid id', () => {
+      it('Should begin to count at 1', () => {
+        const result = f([{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}]);
+        expect(result[0].id).toBe(1);
+        expect(result[1].id).toBe(2);
+      });
+      it('Should have a always positive id', () => {
+        const result = f([{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}], [], -2);
+        expect(result[0].id).toBe(1);
+        expect(result[1].id).toBe(2);
+      });
+      it('Should have the give start as first id', () => {
+        const result = f([{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}], [], 100);
+        expect(result[0].id).toBe(100);
+        expect(result[1].id).toBe(101);
+      });
+    });
   });
 });
