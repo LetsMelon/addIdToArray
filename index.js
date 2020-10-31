@@ -1,8 +1,7 @@
-//const isArray = require('isarray');
 const isArray = Array.isArray;
 const isObject = require('isobject');
 
-const f = (arr, headers = [], start = 1) => {
+module.exports = (arr, headers = [], start = 1) => {
   let i = start - 1 < 0 ? 0 : start - 1;
   return arr.map((item) => {
     i += 1;
@@ -41,5 +40,3 @@ const f = (arr, headers = [], start = 1) => {
     return { ...idObj };
   });
 };
-
-module.exports = f;
