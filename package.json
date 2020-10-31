@@ -1,6 +1,6 @@
 {
   "name": "addidtoarray",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple Function to add an id to an array (May change later!)",
   "main": "index.js",
   "scripts": {
