@@ -1,4 +1,4 @@
-const isArray = require('isarray');
+const isArray = Array.isArray;
 const isObject = require('isobject');
 
 const f = require('./index');

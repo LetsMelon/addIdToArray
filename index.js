@@ -1,4 +1,5 @@
-const isArray = require('isarray');
+//const isArray = require('isarray');
+const isArray = Array.isArray;
 const isObject = require('isobject');
 
 const f = (arr, headers = [], start = 1) => {

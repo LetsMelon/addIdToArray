@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/LetsMelon/addIdToArray#readme",
   "dependencies": {
-    "isarray": "^2.0.5",
     "isobject": "^4.0.0"
   },
   "devDependencies": {
