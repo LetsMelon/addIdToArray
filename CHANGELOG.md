@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - link for 1.1.0 compare in CHANGELOG.md
+- github workflow 'npm-publish.yml'
 
 ## [1.1.0] (2020-11-03)
 
