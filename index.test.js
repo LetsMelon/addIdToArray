@@ -1,3 +1,10 @@
+/*!
+ * addidtoarray <https://github.com/LetsMelon/addIdToArray>
+ *
+ * Copyright (c) 2020, Domenic
+ * Released under the MIT License.
+ */
+
 const isArray = Array.isArray;
 const isObject = require('isobject');
 const _ = require('lodash');
