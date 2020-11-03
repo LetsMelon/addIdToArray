@@ -8,6 +8,12 @@
 const isArray = Array.isArray;
 const isObject = require('isobject');
 
+const simple_id_function = (item, params) => {
+  const back = {};
+  back[params.increment_name] = params.current_number;
+  return back;
+};
+
 /**
  * Add id parameter to object, array or single value
  * Go to the readme to see some examples.
@@ -23,22 +29,25 @@ const isObject = require('isobject');
  * @param {number} [start=0]  start + 1 is the first id.
  * @param {string} [increment_name='id']  How the 'id' property is called.
  * @param {number} [increment_step=1] The increment step of the id.
+ * @param {function} [customIdFunction=simple_id_function] Set a function to generate the id. More in README.md
  * 
  * @return {Object[]} Each entry has a parameter (see increment_name) with a id.
  */
-module.exports = (arr, headers, start, increment_name, increment_step) => {
+module.exports = (arr, headers, start, increment_name, increment_step, customIdFunction) => {
   arr = isArray(arr) ? arr : [arr];
   headers = headers === undefined ? [] : isArray(headers) ? headers : [headers];
   start = (start === undefined || typeof start !== 'number') ? 0 : start;
   increment_name = (increment_name === undefined || typeof increment_name !== 'string' || increment_name.length < 1) ? 'id' : increment_name;
   increment_step = (increment_step === undefined || typeof increment_step !== 'number') ? 1 : increment_step;
+  customIdFunction = (customIdFunction === undefined || typeof customIdFunction !== 'function') ? simple_id_function : customIdFunction;
 
   let i = start - increment_step < 0 ? 0 : start - increment_step;
-  return arr.map((item) => {
+  return arr.map((item, index) => {
     i += increment_step;
 
-    const idObj = {};
-    idObj[increment_name] = i;
+    const params = {current_number: i, index, increment_name, increment_step, start};
+    let idObj = customIdFunction(item, params);
+    if (!isObject(idObj)) idObj = simple_id_function(params);
 
     if (isArray(headers) && headers.length === 1) {
       const head = headers[0].toString();

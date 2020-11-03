@@ -50,6 +50,30 @@ addIdToArray(arr, headers, start, increment_name, increment_step);
 | increment_name | How the 'id' property is called.              | 'special_number' | 'id'    |          |
 | increment_step | The increment step of the id.                 | 5                | 1       |          |
 
+### Custom id function
+
+##### Requirements
+
+Version: <b>>= 1.2.0-develop</b>
+
+- has to <b>accept two parameters</b>
+  - item: Array or Object
+  - params: Object
+    - current_number: calculated number with `start` and `increment_step`
+    - index: index from item in `arr`
+    - increment_name: same as `increment_name` from addIdToArray
+    - increment_step: same as `increment_step` from addIdToArray
+    - start: same as `start` from addIdToArray
+- has to <b>return an object</b>, uses default 'id-function'
+
+##### Template
+
+```js
+const customIdFunctionTemplate = (item, params) => {
+  return {};
+}
+```
+
 ## Run tests
 
 ```sh
@@ -82,6 +106,31 @@ exports.seed = async (knex) => {
    */
   await knex('country').insert(data);
 };
+```
+
+### custom Id function - hash
+
+Require a 'hash' library like: [object-hash](https://www.npmjs.com/package/object-hash), [crypto-js](https://www.npmjs.com/package/crypto-js), [hash.js](https://www.npmjs.com/package/hash.js)
+
+```js
+const addIdToArray = require('addidtoarray');
+const hash = require('object-hash');
+
+const customHashIdFunction = (item, params) => {
+  const back = {};
+  back[params.increment_name] = hash(item);
+  return back;
+};
+
+const data = [['Jeff', 19], ['Maria', 20]];
+const hashedData = addIdToArray(data, ['name', 'age'], 
+  undefined, undefined, 
+  undefined, customHashIdFunction
+);
+/*
+ * hashedData: [{id: 'fb...75', name: 'Jeff', age: 19},
+ *              {id: 'c2...82', name: 'Maria', age: 20}]
+ */
 ```
 
 ## Todo
