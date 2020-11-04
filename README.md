@@ -39,16 +39,17 @@ const addIdToArray = require('addidtoarray');
 ### Parameter
 
 ```js
-addIdToArray(arr, headers, start, increment_name, increment_step);
+addIdToArray(arr, headers, start, increment_name, increment_step, custom_id_function);
 ```
 
-| Parameter      | Description                                   | Example          | Default | Required |
-| -------------- | --------------------------------------------- | ---------------- | ------- | -------- |
-| arr            | Raw data without id.                          | ['Jeff',19]      | /       | X        |
-| headers        | How to call the properties <br>of the object. | ['name', 'age']  | /       |          |
-| start          | start + 1 is the first id.                    | 100              | 0       |          |
-| increment_name | How the 'id' property is called.              | 'special_number' | 'id'    |          |
-| increment_step | The increment step of the id.                 | 5                | 1       |          |
+| Parameter          | Description                                   | Example          | Default      | Required |
+| ------------------ | --------------------------------------------- | ---------------- | ------------ | -------- |
+| arr                | Raw data without id.                          | ['Jeff',19]      | /            | X        |
+| headers            | How to call the properties <br>of the object. | ['name', 'age']  | /            |          |
+| start              | start + 1 is the first id.                    | 100              | 0            |          |
+| increment_name     | How the 'id' property is called.              | 'special_number' | 'id'         |          |
+| increment_step     | The increment step of the id.                 | 5                | 1            |          |
+| custom_id_function | Function to generate the id                   | see index.js     | see index.js |          |
 
 ### Custom id function
 

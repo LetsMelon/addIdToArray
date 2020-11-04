@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- added `customIdFunction` as parameter ([#2])
-- added example for `customIdFunction` in README.md
+- added `custom_id_function` as parameter ([#2])
+- added example for `custom_id_function` in README.md
 - added '[husky](https://www.npmjs.com/package/husky)' as dev. dependency
 
 ### Fixed
