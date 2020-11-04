@@ -47,7 +47,7 @@ module.exports = (arr, headers, start, increment_name, increment_step, custom_id
 
     const params = {current_number: i, index, increment_name, increment_step, start};
     let idObj = custom_id_function(item, params);
-    if (!isObject(idObj)) idObj = simple_id_function(params);
+    if (!isObject(idObj)) idObj = simple_id_function(item, params);
 
     if (isArray(headers) && headers.length === 1) {
       const head = headers[0].toString();
