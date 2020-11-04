@@ -39,7 +39,7 @@ module.exports = (arr, headers, start, increment_name, increment_step, custom_id
   start = (start === undefined || typeof start !== 'number') ? 0 : start;
   increment_name = (increment_name === undefined || typeof increment_name !== 'string' || increment_name.length < 1) ? 'id' : increment_name;
   increment_step = (increment_step === undefined || typeof increment_step !== 'number') ? 1 : increment_step;
-  custom_id_function = (custom_id_function === undefined || typeof custom_id_function !== 'function') ? simple_id_function : customIdFunction;
+  custom_id_function = (custom_id_function === undefined || typeof custom_id_function !== 'function') ? simple_id_function : custom_id_function;
 
   let i = start - increment_step < 0 ? 0 : start - increment_step;
   return arr.map((item, index) => {
