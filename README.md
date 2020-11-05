@@ -139,4 +139,4 @@ const hashedData = addIdToArray(data, ['name', 'age'],
 - [ ] better code documentation (maybe jsdoc)
 - [ ] add more examples
 - [ ] write better tests, see [1. issue](https://github.com/LetsMelon/addIdToArray/issues/1)
-- [ ] custom id function, see [2. issue](https://github.com/LetsMelon/addIdToArray/issues/2)
+- [x] custom id function, see [2. issue](https://github.com/LetsMelon/addIdToArray/issues/2)
