@@ -9,12 +9,8 @@ A simply function to add a id to your data.
 ```js
 const addIdToArray = require('addidtoarray');
 
-addIdToArray(
-  [
-    ['Jeff', 19],
-    ['Maria', 20],
-  ],
-  ['name', 'age']
+addIdToArray([['Jeff', 19], ['Maria', 20], ],
+  { headers: ['name', 'age']}
 );
 // --> [{id: 1, name: 'Jeff', age: 19}, ...]
 
@@ -36,20 +32,23 @@ $ npm install addidtoarray
 const addIdToArray = require('addidtoarray');
 ```
 
-### Parameter (will change in v2.0.0!)
+### Parameter
 
 ```js
-addIdToArray(arr, headers, start, increment_name, increment_step, custom_id_function);
+addIdToArray(arr, parameter: {headers, start, increment_name, 
+  increment_step, custom_id_function}
+);
 ```
 
-| Parameter          | Data type                             | Description                                  | Example                              | Default                      | Required |
-|--------------------|---------------------------------------|----------------------------------------------|--------------------------------------|------------------------------|----------|
-| arr                | Array or Object                       | Raw data without id.                         | ['Jeff',19] ;<br>{['Jeff', 19}, ...] |                              |     X    |
-| headers            | String or [String]                    | How to call the properties<br>of the object. | ['name', 'age'] ;<br>'name'          |           undefined          |          |
-| start              | Number                                | start + 1 is the first id.                   | 100                                  |               0              |          |
-| increment_name     | String                                | How the 'id' property is called.             | 'special_number'                     |             'id'             |          |
-| increment_step     | Number                                | The increment step of the id.                | 5                                    |               1              |          |
-| custom_id_function | Function<br>(has to return an object) | Function to generate the id.                 | see in README<br>or index.js         | see in README<br>or index.js |          |
+| Parameter                    | Data type                             | Description                                  | Example                              | Default                      | Required |
+|------------------------------|---------------------------------------|----------------------------------------------|--------------------------------------|------------------------------|----------|
+| arr                          | Array or Object                       | Raw data without id.                         | ['Jeff',19] ;<br>{['Jeff', 19}, ...] |                              |     X    |
+| parameter                    | Object                                | Optional parameters!                         | see in README<br>or index.js         |              {}              |          |
+| parameter.headers            | String or [String]                    | How to call the properties<br>of the object. | ['name', 'age'] ;<br>'name'          |           undefined          |          |
+| parameter.start              | Number                                | start + 1 is the first id.                   | 100                                  |               1              |          |
+| parameter.increment_name     | String                                | How the 'id' property is called.             | 'special_number'                     |             'id'             |          |
+| parameter.increment_step     | Number                                | The increment step of the id.                | 5                                    |               1              |          |
+| parameter.custom_id_function | Function<br>(has to return an object) | Function to generate the id.                 | see in README<br>or index.js         | see in README<br>or index.js |          |
 
 ### Custom id function
 
@@ -110,7 +109,9 @@ exports.seed = async (knex) => {
     ['USA', 'Washington D.C.'],
     ['Germany', 'Berlin'],
   ];
-  const data = addIdToArray(countries, ['name', 'capital']);
+  const data = addIdToArray(countries, 
+    { headers: ['name', 'capital']}
+  );
   /*
    * data: [ { id: 1, name: 'USA', capital: 'Washington D.C.' },
    *         { id: 2, name: 'Germany', capital: 'Berlin' } ]
@@ -134,9 +135,8 @@ const customHashIdFunction = (item, params) => {
 };
 
 const data = [['Jeff', 19], ['Maria', 20]];
-const hashedData = addIdToArray(data, ['name', 'age'], 
-  undefined, undefined, 
-  undefined, customHashIdFunction
+const hashedData = addIdToArray(data, 
+  { headers: ['name', 'age'], custom_id_function: customHashIdFunction}
 );
 /*
  * hashedData: [{id: 'fb...75', name: 'Jeff', age: 19},

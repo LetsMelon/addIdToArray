@@ -21,19 +21,22 @@ const simple_id_function = (item, params) => {
  * Returns an array with objects. They have a field with a id.
  * Example: 
  *  arr = ['Peter',...];
- *  headers = 'name';
+ *  parameter: headers = 'name';
  *  --> returns: [{id: 1, name: 'Peter'}, ...]
  * 
  * @param {(Object[]|Object)} arr Raw data without id.
- * @param {(string[]|string)} headers How to call the properties of the object.
- * @param {number} [start=0]  start + 1 is the first id.
- * @param {string} [increment_name='id']  How the 'id' property is called.
- * @param {number} [increment_step=1] The increment step of the id.
- * @param {function} [custom_id_function=simple_id_function] Set a function to generate the id. More in README.md
+ * @param {Object} parameter Optional parameters!
+ * @param {(string[]|string)} parameter.headers How to call the properties of the object.
+ * @param {number} [parameter.start=0]  start + 1 is the first id.
+ * @param {string} [parameter.increment_name='id']  How the 'id' property is called.
+ * @param {number} [parameter.increment_step=1] The increment step of the id.
+ * @param {function} [parameter.custom_id_function=simple_id_function] Set a function to generate the id. More in README.md
  * 
  * @return {Object[]} Each entry has a parameter (see increment_name) with a id.
  */
-module.exports = (arr, headers, start, increment_name, increment_step, custom_id_function) => {
+module.exports = (arr, parameter) => {
+  let {headers, start, increment_name, increment_step, custom_id_function} = parameter || {};
+
   arr = isArray(arr) ? arr : [arr];
   headers = headers === undefined ? [] : isArray(headers) ? headers : [headers];
   start = (start === undefined || typeof start !== 'number' || start < 0) ? 1 : start;
