@@ -36,20 +36,20 @@ $ npm install addidtoarray
 const addIdToArray = require('addidtoarray');
 ```
 
-### Parameter
+### Parameter (will change in v2.0.0!)
 
 ```js
 addIdToArray(arr, headers, start, increment_name, increment_step, custom_id_function);
 ```
 
-| Parameter          | Description                                   | Example          | Default      | Required |
-| ------------------ | --------------------------------------------- | ---------------- | ------------ | -------- |
-| arr                | Raw data without id.                          | ['Jeff',19]      | /            | X        |
-| headers            | How to call the properties <br>of the object. | ['name', 'age']  | []           |          |
-| start              | start + 1 is the first id.                    | 100              | 1            |          |
-| increment_name     | How the 'id' property is called.              | 'special_number' | 'id'         |          |
-| increment_step     | The increment step of the id.                 | 5                | 1            |          |
-| custom_id_function | Function to generate the id                   | see index.js     | see index.js |          |
+| Parameter          | Data type                             | Description                                  | Example                              | Default                      | Required |
+|--------------------|---------------------------------------|----------------------------------------------|--------------------------------------|------------------------------|----------|
+| arr                | Array or Object                       | Raw data without id.                         | ['Jeff',19] ;<br>{['Jeff', 19}, ...] |                              |     X    |
+| headers            | String or [String]                    | How to call the properties<br>of the object. | ['name', 'age'] ;<br>'name'          |           undefined          |          |
+| start              | Number                                | start + 1 is the first id.                   | 100                                  |               0              |          |
+| increment_name     | String                                | How the 'id' property is called.             | 'special_number'                     |             'id'             |          |
+| increment_step     | Number                                | The increment step of the id.                | 5                                    |               1              |          |
+| custom_id_function | Function<br>(has to return an object) | Function to generate the id.                 | see in README<br>or index.js         | see in README<br>or index.js |          |
 
 ### Custom id function
 
@@ -65,7 +65,7 @@ Version: <b>>= 1.2.0-develop</b>
     - increment_name: same as `increment_name` from addIdToArray
     - increment_step: same as `increment_step` from addIdToArray
     - start: same as `start` from addIdToArray
-- has to <b>return an object</b>, uses default 'id-function'
+- has to <b>return an object</b>, if not --> use default function
 
 ##### Template
 
@@ -73,6 +73,16 @@ Version: <b>>= 1.2.0-develop</b>
 const customIdFunctionTemplate = (item, params) => {
   return {};
 }
+```
+
+##### Default
+
+```js
+const simple_id_function = (item, params) => {
+  const back = {};
+  back[params.increment_name] = params.current_number;
+  return back;
+};
 ```
 
 ## Run tests
