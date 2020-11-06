@@ -6,7 +6,8 @@
  */
 
 const isArray = Array.isArray;
-const isObject = require('isobject');
+const isObject = (variable) => typeof variable === 'object' && variable !== null;
+
 const _ = require('lodash');
 
 const f = require('./index');

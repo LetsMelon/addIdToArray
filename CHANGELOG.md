@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - **BREAKING**: optional parameter, `(arr, headers, start, increment_name, increment_step, custom_id_function)` to<br>`arr, parameter: {headers, start, increment_name, increment_step, custom_id_function}` ([#4])
 - changed README.md to use optional parameter
+- removed `isObject` as dependency ([#6])
 
 ### 
 
@@ -55,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [#2]: https://github.com/LetsMelon/addIdToArray/issues/2
 [#4]: https://github.com/LetsMelon/addIdToArray/issues/4
+[#6]: https://github.com/LetsMelon/addIdToArray/issues/6
 
 [develop]: https://github.com/LetsMelon/addIdToArray/compare/main...develop
 [1.2.0]: https://github.com/LetsMelon/addIdToArray/compare/v1.1.0...v1.2.0

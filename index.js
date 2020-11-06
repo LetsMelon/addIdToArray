@@ -6,7 +6,7 @@
  */
 
 const isArray = Array.isArray;
-const isObject = require('isobject');
+const isObject = (variable) => typeof variable === 'object' && variable !== null;
 
 const simple_id_function = (item, params) => {
   const back = {};
