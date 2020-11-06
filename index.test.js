@@ -307,4 +307,51 @@ describe('addIdToArray', () => {
       expect(result[1].id).toBe(21);
     });
   });
+  describe('Parameter: custom_id_function', () => {
+    const demoData = [{name: 'Jeff', age: 19}, {name: 'Maria', age: 20}];
+   
+   it('Should have a default function', () => {
+      const result = f(demoData);
+      expect(result[0].id).toBeDefined();
+      expect(result[1].id).toBeDefined();
+
+      expect(result[0].id).toBe(1);
+      expect(result[1].id).toBe(2);
+    });
+   it('Should use given function', () => {
+      let customFunction = (item, params) => {
+        return {id: params.index};
+      }
+
+      let result = f(demoData,undefined, undefined, undefined, undefined, customFunction);
+      expect(result[0].id).toBeDefined();
+      expect(result[1].id).toBeDefined();
+
+      expect(result[0].id).toBe(0);
+      expect(result[1].id).toBe(1);
+
+      customFunction = (item, params) => {
+        return {id: params.index.toString()};
+      }
+
+      result = f(demoData, undefined, undefined, undefined, undefined, customFunction);
+      expect(result[0].id).toBeDefined();
+      expect(result[1].id).toBeDefined();
+
+      expect(result[0].id).toBe('0');
+      expect(result[1].id).toBe('1');
+    });
+   it('Should use default function if the passed is incorrect', () => {
+      const customFunction = (item, params) => {
+        return params.index;
+      }
+
+      const result = f(demoData, undefined, undefined, undefined, undefined, customFunction);
+      expect(result[0].id).toBeDefined();
+      expect(result[1].id).toBeDefined();
+
+      expect(result[0].id).toBe(1);
+      expect(result[1].id).toBe(2);
+    });
+  });
 });
