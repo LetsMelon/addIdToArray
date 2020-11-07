@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Develop]
 
+### Added
+
+- added eslint and prettier as dev.-dep.
+
 ### Changed
 
 - **BREAKING**: optional parameter, `(arr, headers, start, increment_name, increment_step, custom_id_function)` to<br>`arr, parameter: {headers, start, increment_name, increment_step, custom_id_function}` ([#4])
