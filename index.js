@@ -8,6 +8,19 @@
 const isArray = Array.isArray;
 const isObject = (variable) => typeof variable === 'object' && variable !== null;
 
+/**
+ * Default function to generate the id value.
+ * 
+ * @param {*} item Is the current item at the index in arr. Passed from the main function.
+ * @param {Object} params Parameters passed from the main function. Always defined!
+ * @param {Number} params.current_number params.start + params.index * params.increment_step
+ * @param {Number} params.index Current index in 'arr' from main function
+ * @param {String} params.increment_name 'increment_name' passed to main function or default value
+ * @param {Number} params.increment_step 'increment_step' passed to main function or default value
+ * @param {Number} params.start 'start' passed to main function or default value
+ * 
+ * @returns {Object}
+ */
 const simple_id_function = (item, params) => {
   const back = {};
   back[params.increment_name] = params.current_number;
@@ -32,7 +45,7 @@ const simple_id_function = (item, params) => {
  * @param {number} [parameter.increment_step=1] The increment step of the id.
  * @param {function} [parameter.custom_id_function=simple_id_function] Set a function to generate the id. More in README.md
  * 
- * @return {Object[]} Each entry has a parameter (see increment_name) with a id.
+ * @returns {Object[]} Each entry has a parameter (see increment_name) with a id.
  */
 module.exports = (arr, parameter) => {
   let {headers, start, increment_name, increment_step, custom_id_function} = parameter || {};
