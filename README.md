@@ -35,8 +35,8 @@ const addIdToArray = require('addidtoarray');
 ### Parameter
 
 ```js
-addIdToArray(arr, parameter: {headers, start, increment_name, 
-  increment_step, custom_id_function}
+addIdToArray(arr, parameter: {headers, start, incrementName, 
+  incrementStep, customIdFunction}
 );
 ```
 
@@ -46,9 +46,9 @@ addIdToArray(arr, parameter: {headers, start, increment_name,
 | parameter                    | Object                                | Optional parameters!                         | see in README<br>or index.js         |              {}              |          |
 | parameter.headers            | String or [String]                    | How to call the properties<br>of the object. | ['name', 'age'] ;<br>'name'          |           undefined          |          |
 | parameter.start              | Number                                | start + 1 is the first id.                   | 100                                  |               1              |          |
-| parameter.increment_name     | String                                | How the 'id' property is called.             | 'special_number'                     |             'id'             |          |
-| parameter.increment_step     | Number                                | The increment step of the id.                | 5                                    |               1              |          |
-| parameter.custom_id_function | Function<br>(has to return an object) | Function to generate the id.                 | see in README<br>or index.js         | see in README<br>or index.js |          |
+| parameter.incrementName     | String                                | How the 'id' property is called.             | 'special_number'                     |             'id'             |          |
+| parameter.incrementStep     | Number                                | The increment step of the id.                | 5                                    |               1              |          |
+| parameter.customIdFunction | Function<br>(has to return an object) | Function to generate the id.                 | see in README<br>or index.js         | see in README<br>or index.js |          |
 
 ### Custom id function
 
@@ -59,10 +59,10 @@ Version: <b>>= 1.2.0-develop</b>
 - has to <b>accept two parameters</b>
   - item: Array or Object
   - params: Object
-    - current_number: calculated number with `start` and `increment_step`
+    - current_number: calculated number with `start` and `incrementStep`
     - index: index from item in `arr`
-    - increment_name: same as `increment_name` from addIdToArray
-    - increment_step: same as `increment_step` from addIdToArray
+    - incrementName: same as `incrementName` from addIdToArray
+    - incrementStep: same as `incrementStep` from addIdToArray
     - start: same as `start` from addIdToArray
 - has to <b>return an object</b>, if not --> use default function
 
@@ -77,9 +77,9 @@ const customIdFunctionTemplate = (item, params) => {
 ##### Default
 
 ```js
-const simple_id_function = (item, params) => {
+const simpleIdFunction = (item, params) => {
   const back = {};
-  back[params.increment_name] = params.current_number;
+  back[params.incrementName] = params.currentNumber;
   return back;
 };
 ```
@@ -130,13 +130,13 @@ const hash = require('object-hash');
 
 const customHashIdFunction = (item, params) => {
   const back = {};
-  back[params.increment_name] = hash(item);
+  back[params.incrementName] = hash(item);
   return back;
 };
 
 const data = [['Jeff', 19], ['Maria', 20]];
 const hashedData = addIdToArray(data, 
-  { headers: ['name', 'age'], custom_id_function: customHashIdFunction}
+  { headers: ['name', 'age'], customIdFunction: customHashIdFunction}
 );
 /*
  * hashedData: [{id: 'fb...75', name: 'Jeff', age: 19},

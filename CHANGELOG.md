@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- **BREAKING**: optional parameter, `(arr, headers, start, increment_name, increment_step, custom_id_function)` to<br>`arr, parameter: {headers, start, increment_name, increment_step, custom_id_function}` ([#4])
+- **BREAKING**: optional parameter with object and in camelCase, `(arr, headers, start, increment_name, increment_step, custom_id_function)` to<br>`arr, parameter: {headers, start, incrementName, incrementStep, customIdFunction}` ([#4])
 - changed README.md to use optional parameter
 - removed `isObject` as dependency ([#6])
 
