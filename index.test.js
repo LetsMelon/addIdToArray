@@ -133,7 +133,6 @@ describe('addIdToArray', () => {
         expect(typeof result[0].age).toBe('number');
 
         // Boolean:
-        // TODO not using v2.0.0 params
         result = f([{ car_is_red: true }, { car_is_red: false }]);
         expect(typeof result[0].car_is_red).toBe('boolean');
         expect(typeof result[1].car_is_red).toBe('boolean');
@@ -170,17 +169,15 @@ describe('addIdToArray', () => {
           expect(result[1].id).toBe(2);
         });
         it('Should have a always positive id', () => {
-          // TODO not using v2.0.0 params
           const result = f(
             [
               { name: 'Jeff', age: 19 },
               { name: 'Maria', age: 20 },
             ],
-            [],
-            -2
+            { incrementStep: -2 }
           );
           expect(result[0].id).toBe(1);
-          expect(result[1].id).toBe(2);
+          expect(result[1].id).toBe(-1); // TODO discuss if this should be possible
         });
         it('Should have the give start as first id', () => {
           const result = f(
@@ -197,17 +194,18 @@ describe('addIdToArray', () => {
     });
     describe('Nested array', () => {
       it('Should return an array with objects', () => {
-        // TODO not using v2.0.0 params
         const result = f(
           [
             ['Jeff', 19],
             ['Maria', 20],
           ],
-          ['name', 'age']
+          { headers: ['name', 'age'] }
         );
         expect(isArray(result)).toBe(true);
         expect(result.length).toBe(2);
         expect(isObject(result[0])).toBe(true);
+        // eslint-disable-next-line prettier/prettier
+        expect(_.isEqual(result[1], { id: 2, name: 'Maria', age: 20 })).toBe(true);
       });
       it('Should return objects with id', () => {
         const result = f(
@@ -347,20 +345,21 @@ describe('addIdToArray', () => {
     });
     describe('start', () => {
       it('Should start to count at 1 on default', () => {
-        // TODO not using v2.0.0 params
-        let result = f({ name: 'Jeff', age: 19 }, 'person');
+        const result = f({ name: 'Jeff', age: 19 }, { headers: 'person' });
         expect(result[0].id).toBe(1);
-        // TODO not using v2.0.0 params
-        result = f({ name: 'Jeff', age: 19 }, 'person', 1);
-        expect(result[0].id).toBe(1);
+        expect(result[0].person.name).toBe('Jeff');
       });
       it('Should start to count at 1 on default if value is negative or undefined', () => {
-        // TODO not using v2.0.0 params
-        let result = f({ name: 'Jeff', age: 19 }, 'person', -2);
+        let result = f(
+          { name: 'Jeff', age: 19 },
+          { headers: 'person', start: -2 }
+        );
         expect(result[0].id).toBe(1);
 
-        // TODO not using v2.0.0 params
-        result = f({ name: 'Jeff', age: 19 }, 'person', undefined);
+        result = f(
+          { name: 'Jeff', age: 19 },
+          { headers: 'person', start: undefined }
+        );
         expect(result[0].id).toBe(1);
       });
       it('Should start to count on any (positive) number', () => {
@@ -371,27 +370,28 @@ describe('addIdToArray', () => {
         expect(result[0].id).toBe(189.75);
       });
       it('Should only take numbers to count', () => {
-        // TODO not using v2.0.0 params
         let result = f(
           { name: 'Jeff', age: 19 },
-          'person',
-          'my special number'
+          { headers: 'person', start: 'my special number' }
         );
         expect(result[0].id).toBe(1);
 
-        // TODO not using v2.0.0 params
-        result = f({ name: 'Jeff', age: 19 }, 'person', { id: 1 });
+        result = f(
+          { name: 'Jeff', age: 19 },
+          { headers: 'person', start: { id: 1 } }
+        );
         expect(result[0].id).toBe(1);
       });
     });
-    describe('increment_name', () => {
+    describe('incrementName', () => {
       it('Should be "id" on default', () => {
-        // TODO not using v2.0.0 params
-        let result = f({ name: 'Jeff', age: 19 }, 'person');
+        let result = f({ name: 'Jeff', age: 19 }, { headers: 'person' });
         expect(result[0].id).toBeDefined();
 
-        // TODO not using v2.0.0 params
-        result = f({ name: 'Jeff', age: 19 }, 'person', undefined, 'id');
+        result = f(
+          { name: 'Jeff', age: 19 },
+          { headers: 'person', incrementName: 'id' }
+        );
         expect(result[0].id).toBeDefined();
       });
       it('Should be be a string with length > 0', () => {
@@ -400,64 +400,55 @@ describe('addIdToArray', () => {
           { headers: 'person', incrementName: 'increment variable name' }
         );
         expect(result[0]['increment variable name']).toBeDefined();
+        expect(result[0]['increment variable name']).toBe(1);
 
         result = f(
           { name: 'Jeff', age: 19 },
-          { headers: 'person', increment_name: '' }
+          { headers: 'person', incrementName: '' }
         );
         expect(result[0].id).toBeDefined();
+        expect(result[0].id).toBe(1);
       });
       it('Should default to "id" if value is not a string', () => {
-        // TODO not using v2.0.0 params; What is this?
-        let result = f({ name: 'Jeff', age: 19 }, 'person', undefined, {
-          name: 'id',
-        });
+        const result = f(
+          { name: 'Jeff', age: 19 },
+          {
+            headers: 'person',
+            incrementName: { name: 'id' },
+          }
+        );
         expect(result[0].id).toBeDefined();
-        // TODO what is this?
         expect(result[0][{ name: 'id' }.toString()]).not.toBeDefined();
-
-        // TODO not using v2.0.0 params
-        result = f({ name: 'Jeff', age: 19 }, 'person', undefined, undefined);
-        expect(result[0].id).toBeDefined();
       });
     });
-    describe('increment_step', () => {
+    describe('incrementStep', () => {
       it('Should be 1 on default', () => {
-        // TODO not using v2.0.0 params
         let result = f(
           [
             { name: 'Jeff', age: 19 },
             { name: 'Maria', age: 20 },
           ],
-          'person'
+          { headers: 'person' }
         );
         expect(result[0].id).toBe(1);
         expect(result[1].id).toBe(2);
 
-        // TODO not using v2.0.0 params
         result = f(
           [
             { name: 'Jeff', age: 19 },
             { name: 'Maria', age: 20 },
           ],
-          'person',
-          undefined,
-          undefined,
-          undefined
+          { headers: 'person', incrementStep: undefined }
         );
         expect(result[0].id).toBe(1);
         expect(result[1].id).toBe(2);
 
-        // TODO not using v2.0.0 params
         result = f(
           [
             { name: 'Jeff', age: 19 },
             { name: 'Maria', age: 20 },
           ],
-          'person',
-          undefined,
-          undefined,
-          1
+          { headers: 'person', incrementStep: 1 }
         );
         expect(result[0].id).toBe(1);
         expect(result[1].id).toBe(2);
@@ -504,7 +495,7 @@ describe('addIdToArray', () => {
         expect(result[1].id).toBe(21);
       });
     });
-    describe('custom_id_function', () => {
+    describe('customIdFunction', () => {
       const demoData = [
         { name: 'Jeff', age: 19 },
         { name: 'Maria', age: 20 },
@@ -546,8 +537,6 @@ describe('addIdToArray', () => {
           return params.index;
         };
 
-        // TODO check why this test pass
-        // const result = f(demoData, undefined, undefined, undefined, undefined, customFunction);
         const result = f(demoData, { customIdFunction: customFunction });
         expect(result[0].id).toBeDefined();
         expect(result[1].id).toBeDefined();
