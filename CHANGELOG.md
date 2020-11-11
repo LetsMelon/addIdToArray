@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - added eslint and prettier as dev.-dep.
 - added tests for `lib/functions.js`
+- added `benchmark` as dev.-dep.
+- added simple benchmarks
 
 ### Changed
 
