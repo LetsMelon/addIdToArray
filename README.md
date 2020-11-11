@@ -94,6 +94,15 @@ $ npm ci
 $ npm test
 ```
 
+## Run benchmarks
+
+```sh
+$ git clone https://github.com/LetsMelon/addIdToArray.git
+$ cd addIdToArray
+$ npm ci
+$ npm run benchmark
+```
+
 ## Examples
 
 ### knex.js
