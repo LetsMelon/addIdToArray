@@ -38,7 +38,8 @@
   "files": [
     "index.js",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "lib/functions.js"
   ],
   "husky": {
     "hooks": {

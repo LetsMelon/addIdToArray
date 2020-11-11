@@ -5,10 +5,7 @@
  * Released under the MIT License.
  */
 
-// eslint-disable-next-line prefer-destructuring
-const isArray = Array.isArray;
-const isObject = (variable) =>
-  typeof variable === 'object' && variable !== null;
+const { isArray, isObject } = require('./lib/functions');
 
 /**
  * Default function to generate the id value.

@@ -7,12 +7,8 @@
  * Released under the MIT License.
  */
 
-// eslint-disable-next-line prefer-destructuring
-const isArray = Array.isArray;
-const isObject = (variable) =>
-  typeof variable === 'object' && variable !== null;
-
 const _ = require('lodash');
+const { isArray, isObject } = require('./lib/functions');
 
 const f = require('./index');
 
