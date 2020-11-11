@@ -3,6 +3,7 @@
 ![npm](https://img.shields.io/npm/v/addidtoarray)
 ![npm](https://img.shields.io/npm/dw/addidtoarray)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/addidtoarray)
+![GitHub](https://img.shields.io/github/license/LetsMelon/addIdToArray)
 
 A simply function to add a id to your data.
 
@@ -150,3 +151,13 @@ const hashedData = addIdToArray(data,
 - [ ] add more examples
 - [ ] write better tests, see [1. issue](https://github.com/LetsMelon/addIdToArray/issues/1)
 - [x] custom id function, see [2. issue](https://github.com/LetsMelon/addIdToArray/issues/2)
+
+## License
+
+<i>
+MIT LICENSE
+
+Copyright (C) 2020 Domenic Melcher
+
+For more info see [LICENSE](LICENSE)
+</i>
