@@ -7,7 +7,7 @@
  * Released under the MIT License.
  */
 
-const { isEqual } = require('@ngard/tiny-isequal');
+const isEqual = require('lodash.isequal');
 const { isArray, isObject } = require('./lib/functions');
 
 const f = require('./index');

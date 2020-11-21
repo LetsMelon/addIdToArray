@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - changed README.md to use optional parameter
 - removed `isObject` as dependency ([#6])
 - removed duplicate functions and add them to the file `lib/functions.js`
-- removed `lodash` as dev.-dep and installed slimmer `@ngard/tiny-isequal` instead
+- replaced `lodash` with single function-dep `lodash.isequal`
 
 ### 
 
