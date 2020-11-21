@@ -7,7 +7,7 @@
  * Released under the MIT License.
  */
 
-const _ = require('lodash');
+const { isEqual } = require('@ngard/tiny-isequal');
 const { isArray, isObject } = require('./lib/functions');
 
 const f = require('./index');
@@ -201,7 +201,9 @@ describe('addIdToArray', () => {
         expect(result.length).toBe(2);
         expect(isObject(result[0])).toBe(true);
         // eslint-disable-next-line prettier/prettier
-        expect(_.isEqual(result[1], { id: 2, name: 'Maria', age: 20 })).toBe(true);
+        expect(isEqual(result[1],{ id: 2, name: 'Maria', age: 20 })).toBe(true);
+        // TODO Check why this fails?
+        // expect(result[1]).toBe({ id: 2, name: 'Maria', age: 20 });
       });
       it('Should return objects with id', () => {
         const result = f(
@@ -326,7 +328,10 @@ describe('addIdToArray', () => {
         const result2 = f(['Dog', 'Cat'], { headers: 'animal' });
         const result3 = f([{ animal: 'Dog' }, { animal: 'Cat' }]);
         // eslint-disable-next-line prettier/prettier
-        expect(_.isEqual(result, result2) && _.isEqual(result, result3)).toBe(true);
+        expect(isEqual(result, result2) && isEqual(result, result3)).toBe(true);
+        // TODO Check why this fails?
+        // expect(result).toBe(result2);
+        // expect(result).toBe(result3);
 
         result = f(
           [
