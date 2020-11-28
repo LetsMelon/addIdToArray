@@ -1,10 +1,13 @@
 {
   "name": "addidtoarray",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Simple Function to add an id to an array (May change later!)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ./",
+    "fix": "eslint --fix ./",
+    "benchmark": "node benchmark.js"
   },
   "repository": {
     "type": "git",
@@ -20,18 +23,25 @@
     "url": "https://github.com/LetsMelon/addIdToArray/issues"
   },
   "homepage": "https://github.com/LetsMelon/addIdToArray#readme",
-  "dependencies": {
-    "isobject": "^4.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "benchmark": "^2.1.4",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "jest": "^26.6.1",
-    "lodash": "^4.17.20"
+    "lodash.isequal": "^4.5.0",
+    "prettier": "^2.1.2"
   },
   "files": [
     "index.js",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "lib/functions.js"
   ],
   "husky": {
     "hooks": {

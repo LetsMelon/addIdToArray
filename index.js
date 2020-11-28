@@ -5,48 +5,71 @@
  * Released under the MIT License.
  */
 
-const isArray = Array.isArray;
-const isObject = require('isobject');
+const { isArray, isObject } = require('./lib/functions');
 
-const simple_id_function = (item, params) => {
+/**
+ * Default function to generate the id value.
+ *
+ * @param {*} item Is the current item at the index in arr. Passed from the main function.
+ * @param {Object} params Parameters passed from the main function. Always defined!
+ * @param {Number} params.current_number params.start + params.index * params.incrementStep
+ * @param {Number} params.index Current index in 'arr' from main function
+ * @param {String} params.incrementName 'incrementName' passed to main function or default value
+ * @param {Number} params.incrementStep 'incrementStep' passed to main function or default value
+ * @param {Number} params.start 'start' passed to main function or default value
+ *
+ * @returns {Object}
+ */
+const defaultId = (item, params) => {
   const back = {};
-  back[params.increment_name] = params.current_number;
+  back[params.incrementName] = params.currentNumber;
   return back;
 };
 
 /**
  * Add id parameter to object, array or single value
  * Go to the readme to see some examples.
- * 
+ *
  * Returns an array with objects. They have a field with a id.
- * Example: 
+ * Example:
  *  arr = ['Peter',...];
- *  headers = 'name';
+ *  parameter: headers = 'name';
  *  --> returns: [{id: 1, name: 'Peter'}, ...]
- * 
+ *
  * @param {(Object[]|Object)} arr Raw data without id.
- * @param {(string[]|string)} headers How to call the properties of the object.
- * @param {number} [start=0]  start + 1 is the first id.
- * @param {string} [increment_name='id']  How the 'id' property is called.
- * @param {number} [increment_step=1] The increment step of the id.
- * @param {function} [custom_id_function=simple_id_function] Set a function to generate the id. More in README.md
- * 
- * @return {Object[]} Each entry has a parameter (see increment_name) with a id.
+ * @param {Object} parameter Optional parameters!
+ * @param {(string[]|string)} parameter.headers How to call the properties of the object.
+ * @param {number} [parameter.start=0]  start + 1 is the first id.
+ * @param {string} [parameter.incrementName='id']  How the 'id' property is called.
+ * @param {number} [parameter.incrementStep=1] The increment step of the id.
+ * @param {function} [parameter.customIdFunction=defaultId] Set a function to generate the id. More in README.md
+ *
+ * @returns {Object[]} Each entry has a parameter (see incrementName) with a id.
  */
-module.exports = (arr, headers, start, increment_name, increment_step, custom_id_function) => {
+module.exports = (arr, parameter) => {
+  let { headers, start, incrementName, incrementStep, customIdFunction } =
+    parameter || {};
+
+  // eslint-disable-next-line no-param-reassign
   arr = isArray(arr) ? arr : [arr];
+  /* eslint-disable prettier/prettier, no-nested-ternary */
   headers = headers === undefined ? [] : isArray(headers) ? headers : [headers];
   start = (start === undefined || typeof start !== 'number' || start < 0) ? 1 : start;
-  increment_name = (increment_name === undefined || typeof increment_name !== 'string' || increment_name.length < 1) ? 'id' : increment_name;
-  increment_step = (increment_step === undefined || typeof increment_step !== 'number') ? 1 : increment_step;
-  custom_id_function = (custom_id_function === undefined || typeof custom_id_function !== 'function') ? simple_id_function : custom_id_function;
+  incrementName = (incrementName === undefined || typeof incrementName !== 'string' || incrementName.length < 1) ? 'id' : incrementName;
+  incrementStep = (incrementStep === undefined || typeof incrementStep !== 'number') ? 1 : incrementStep;
+  customIdFunction = (customIdFunction === undefined || typeof customIdFunction !== 'function') ? defaultId : customIdFunction;
+  /* eslint-enable prettier/prettier, no-nested-ternary */
 
   return arr.map((item, index) => {
-    const i = start + index * increment_step;
-
-    const params = {current_number: i, index, increment_name, increment_step, start};
-    let idObj = custom_id_function(item, params);
-    if (!isObject(idObj)) idObj = simple_id_function(item, params);
+    const params = {
+      currentNumber: start + index * incrementStep,
+      index,
+      incrementName,
+      incrementStep,
+      start,
+    };
+    let idObj = customIdFunction(item, params);
+    if (!isObject(idObj)) idObj = defaultId(item, params);
 
     if (isArray(headers) && headers.length === 1) {
       const head = headers[0].toString();
@@ -58,9 +81,9 @@ module.exports = (arr, headers, start, increment_name, increment_step, custom_id
     if (isArray(item)) {
       let back = {};
       if (item.length === headers.length) {
-        item.forEach((n, index) => {
+        item.forEach((n, nIndex) => {
           const obj = {};
-          obj[headers[index].toString()] = n;
+          obj[headers[nIndex].toString()] = n;
           back = {
             ...back,
             ...obj,
