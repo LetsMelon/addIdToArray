@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - improved ops/sec by changing object-merge-function
 
+### Changed
+
+- replaced `benchmark` with better documented and 'alive' library `benny` (benchmark: [#232])
+
 ## [2.0.0] (2020-11.28)
 ### Added
 
@@ -70,6 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#2]: https://github.com/LetsMelon/addIdToArray/issues/2
 [#4]: https://github.com/LetsMelon/addIdToArray/issues/4
 [#6]: https://github.com/LetsMelon/addIdToArray/issues/6
+[#232]: https://github.com/bestiejs/benchmark.js/issues/232
 
 [develop]: https://github.com/LetsMelon/addIdToArray/compare/main...develop
 [2.0.0]: https://github.com/LetsMelon/addIdToArray/compare/v1.2.0...v2.0.0
