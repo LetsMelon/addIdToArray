@@ -5,7 +5,7 @@
  * Released under the MIT License.
  */
 
-const { isArray, isObject } = require('./lib/functions');
+const { isArray, isObject, mergeObject } = require('./lib/functions');
 
 /**
  * Default function to generate the id value.
@@ -75,7 +75,7 @@ module.exports = (arr, parameter) => {
       const head = headers[0].toString();
       const obj = {};
       obj[head] = item;
-      return { ...idObj, ...obj };
+      return mergeObject(idObj, obj);
     }
 
     if (isArray(item)) {
@@ -84,22 +84,17 @@ module.exports = (arr, parameter) => {
         item.forEach((n, nIndex) => {
           const obj = {};
           obj[headers[nIndex].toString()] = n;
-          back = {
-            ...back,
-            ...obj,
-          };
+          back = mergeObject(back, obj);
         });
       }
-      return { ...idObj, ...back };
+      // return { ...idObj, ...back };
+      return mergeObject(idObj, back);
     }
 
     if (isObject(item)) {
-      return {
-        ...idObj,
-        ...item,
-      };
+      return mergeObject(idObj, item);
     }
 
-    return { ...idObj };
+    return idObj;
   });
 };

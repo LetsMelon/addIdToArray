@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Develop] for v2.0.1
 
+### Added
+
+- improved ops/sec by changing object-merge-function
+
 ## [2.0.0] (2020-11.28)
 ### Added
 
