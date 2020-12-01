@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - improved ops/sec by changing object-merge-function
+- added tests for `lib/functions.mergeObject`
 
 ### Changed
 
