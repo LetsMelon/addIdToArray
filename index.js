@@ -87,7 +87,6 @@ module.exports = (arr, parameter) => {
           back = mergeObject(back, obj);
         });
       }
-      // return { ...idObj, ...back };
       return mergeObject(idObj, back);
     }
 
