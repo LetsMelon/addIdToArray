@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - replaced `benchmark` with better documented and 'alive' library `benny` (benchmark: [#232])
+- rewrote tests for `index.js`
 
 ## [2.0.0] (2020-11.28)
 ### Added
